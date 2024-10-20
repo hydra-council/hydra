@@ -1,0 +1,15 @@
+version: v2
+clean: true
+
+managed:
+  enabled: true
+
+plugins:
+  # Go
+  - local: protoc-gen-go
+    out: ../generated
+    opt: paths=source_relative
+
+  - local: protoc-gen-connect-go
+    out: ../generated
+    opt: paths=source_relative

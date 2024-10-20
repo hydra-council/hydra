@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package manga.v1;
+
+option go_package = "hydra/generated/manga/v1";
+
+service MangaService {
+  // install a new plugin
+  rpc InstallPlugin(NewPluginRequest) returns (NewPluginResponse) {}
+  // delete plugin
+  rpc DeletePlugin(DeletePluginRequest) returns (DeletePluginResponse) {}
+  // search plugin
+  rpc SearchPlugin(SearchPluginRequest) returns (SearchPluginResponse) {}
+  // refresh manga
+  rpc RefreshManga(RefreshMangaRequest) returns (RefreshMangaResponse) {}
+}
+
+
+message NewPluginRequest {
+}
+
+message NewPluginResponse {
+}
+
+message DeletePluginRequest {
+}
+
+message DeletePluginResponse {
+}
+
+
+message SearchPluginRequest {
+  string searchQuery = 1;
+  string pluginID = 2;
+}
+
+message SearchPluginResponse {}
+
+message RefreshMangaResponse {}
+
+message RefreshMangaRequest {}
+
+// todo add more metadata fields
+message MangaMetaData {
+  string title = 1;
+  string released = 2;
+  repeated MangaChapter chapters = 3;
+}
+
+message MangaChapter {
+  string chapterNumber = 1;
+  string chapterName = 2;
+  repeated MangaPage pages = 3;
+}
+
+message MangaPage {
+  int64 page = 1;
+  string url = 2;
+}
