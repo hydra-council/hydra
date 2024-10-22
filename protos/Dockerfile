@@ -88,35 +88,5 @@ ENV PATH="/root/.pub-cache/bin:${PATH}"
 # Create working directory
 WORKDIR /workspace
 
-# Add build script with NVM initialization
-RUN echo '#!/bin/bash\n\
-\n\
-# Load NVM\n\
-export NVM_DIR="/root/.nvm"\n\
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"\n\
-\n\
-# Create output directories\n\
-mkdir -p generated/python generated/dart generated/node generated/web generated/go\n\
-\n\
-# Generate Python gRPC stubs\n\
-python3.12 -m grpc_tools.protoc \
-    -I. \
-    --python_out=./generated/python \
-    --grpc_python_out=./generated/python \
-    ./**/**/**/*.proto\n\
-\n\
-# Generate Dart gRPC stubs\n\
-protoc \
-    -I. \
-    --dart_out=grpc:./generated/dart \
-    ./**/**/**/*.proto\n\
-\n\
-# Generate Connect-RPC stubs using buf\n\
-buf generate\n\
-\n\
-# Fix permissions on generated files\n\
-chmod -R 777 ./generated\n\
-' > /usr/local/bin/generate-stubs && chmod +x /usr/local/bin/generate-stubs
-
 # Default command
-CMD ["generate-stubs"]
+CMD ["./gen-stubs.sh"]
