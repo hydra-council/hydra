@@ -1,0 +1,25 @@
+services:
+  generate-grpc:
+    container_name: hydra_grpc
+    image: hydra-proto:latest
+    build:
+      context: .
+    volumes:
+      - ./:/workspace
+    restart: "no"
+    profiles:
+      - grpc-gen
+
+  grpc-shell:
+    container_name: hydra_grpc_shell
+    image: hydra-proto:latest
+    build:
+      context: .
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    entrypoint: ["/bin/bash"]
+    tty: true
+    stdin_open: true
+    profiles:
+      - grpc-shell

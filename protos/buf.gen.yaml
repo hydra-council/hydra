@@ -7,9 +7,26 @@ managed:
 plugins:
   # Go
   - local: protoc-gen-go
-    out: ../generated
+    out: generated/go
     opt: paths=source_relative
 
   - local: protoc-gen-connect-go
-    out: ../generated
+    out: generated/go
     opt: paths=source_relative
+
+  # Web/TypeScript
+#  - local: es
+#    out: out/web
+#    opt: target=ts
+#  - local: connect-web
+#    out: out/web
+#    opt: target=ts
+
+  # node/typescript
+  - local: protoc-gen-es
+    out: generated/node
+    opt: target=ts
+
+  - local: protoc-gen-connect-es
+    out: generated/node
+    opt: target=ts

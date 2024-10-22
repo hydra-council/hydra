@@ -43,14 +43,16 @@ message RefreshMangaRequest {}
 // todo add more metadata fields
 message MangaMetaData {
   string title = 1;
-  string released = 2;
-  repeated MangaChapter chapters = 3;
+  // each name should be separated by a space
+  string alternateTile = 2;
+  repeated MangaChapter chapters = 4;
 }
 
 message MangaChapter {
   string chapterNumber = 1;
   string chapterName = 2;
-  repeated MangaPage pages = 3;
+  string releaseDateInISO6801 = 3;
+  repeated MangaPage pages = 4;
 }
 
 message MangaPage {

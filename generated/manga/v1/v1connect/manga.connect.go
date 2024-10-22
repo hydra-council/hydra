@@ -33,27 +33,39 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// MangaServiceNewJobProcedure is the fully-qualified name of the MangaService's NewJob RPC.
-	MangaServiceNewJobProcedure = "/manga.v1.MangaService/NewJob"
-	// MangaServiceJobStatusProcedure is the fully-qualified name of the MangaService's JobStatus RPC.
-	MangaServiceJobStatusProcedure = "/manga.v1.MangaService/JobStatus"
-	// MangaServiceCancelJobProcedure is the fully-qualified name of the MangaService's CancelJob RPC.
-	MangaServiceCancelJobProcedure = "/manga.v1.MangaService/CancelJob"
+	// MangaServiceInstallPluginProcedure is the fully-qualified name of the MangaService's
+	// InstallPlugin RPC.
+	MangaServiceInstallPluginProcedure = "/manga.v1.MangaService/InstallPlugin"
+	// MangaServiceDeletePluginProcedure is the fully-qualified name of the MangaService's DeletePlugin
+	// RPC.
+	MangaServiceDeletePluginProcedure = "/manga.v1.MangaService/DeletePlugin"
+	// MangaServiceSearchPluginProcedure is the fully-qualified name of the MangaService's SearchPlugin
+	// RPC.
+	MangaServiceSearchPluginProcedure = "/manga.v1.MangaService/SearchPlugin"
+	// MangaServiceRefreshMangaProcedure is the fully-qualified name of the MangaService's RefreshManga
+	// RPC.
+	MangaServiceRefreshMangaProcedure = "/manga.v1.MangaService/RefreshManga"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	mangaServiceServiceDescriptor         = v1.File_manga_v1_manga_proto.Services().ByName("MangaService")
-	mangaServiceNewJobMethodDescriptor    = mangaServiceServiceDescriptor.Methods().ByName("NewJob")
-	mangaServiceJobStatusMethodDescriptor = mangaServiceServiceDescriptor.Methods().ByName("JobStatus")
-	mangaServiceCancelJobMethodDescriptor = mangaServiceServiceDescriptor.Methods().ByName("CancelJob")
+	mangaServiceServiceDescriptor             = v1.File_manga_v1_manga_proto.Services().ByName("MangaService")
+	mangaServiceInstallPluginMethodDescriptor = mangaServiceServiceDescriptor.Methods().ByName("InstallPlugin")
+	mangaServiceDeletePluginMethodDescriptor  = mangaServiceServiceDescriptor.Methods().ByName("DeletePlugin")
+	mangaServiceSearchPluginMethodDescriptor  = mangaServiceServiceDescriptor.Methods().ByName("SearchPlugin")
+	mangaServiceRefreshMangaMethodDescriptor  = mangaServiceServiceDescriptor.Methods().ByName("RefreshManga")
 )
 
 // MangaServiceClient is a client for the manga.v1.MangaService service.
 type MangaServiceClient interface {
-	NewJob(context.Context, *connect.Request[v1.NewJobRequest]) (*connect.Response[v1.NewJobResponse], error)
-	JobStatus(context.Context, *connect.Request[v1.JobStatusRequest]) (*connect.Response[v1.JobStatusResponse], error)
-	CancelJob(context.Context, *connect.Request[v1.CancelJobRequest]) (*connect.Response[v1.CancelJobResponse], error)
+	// install a new plugin
+	InstallPlugin(context.Context, *connect.Request[v1.NewPluginRequest]) (*connect.Response[v1.NewPluginResponse], error)
+	// delete plugin
+	DeletePlugin(context.Context, *connect.Request[v1.DeletePluginRequest]) (*connect.Response[v1.DeletePluginResponse], error)
+	// search plugin
+	SearchPlugin(context.Context, *connect.Request[v1.SearchPluginRequest]) (*connect.Response[v1.SearchPluginResponse], error)
+	// refresh manga
+	RefreshManga(context.Context, *connect.Request[v1.RefreshMangaRequest]) (*connect.Response[v1.RefreshMangaResponse], error)
 }
 
 // NewMangaServiceClient constructs a client for the manga.v1.MangaService service. By default, it
@@ -66,22 +78,28 @@ type MangaServiceClient interface {
 func NewMangaServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) MangaServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &mangaServiceClient{
-		newJob: connect.NewClient[v1.NewJobRequest, v1.NewJobResponse](
+		installPlugin: connect.NewClient[v1.NewPluginRequest, v1.NewPluginResponse](
 			httpClient,
-			baseURL+MangaServiceNewJobProcedure,
-			connect.WithSchema(mangaServiceNewJobMethodDescriptor),
+			baseURL+MangaServiceInstallPluginProcedure,
+			connect.WithSchema(mangaServiceInstallPluginMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		jobStatus: connect.NewClient[v1.JobStatusRequest, v1.JobStatusResponse](
+		deletePlugin: connect.NewClient[v1.DeletePluginRequest, v1.DeletePluginResponse](
 			httpClient,
-			baseURL+MangaServiceJobStatusProcedure,
-			connect.WithSchema(mangaServiceJobStatusMethodDescriptor),
+			baseURL+MangaServiceDeletePluginProcedure,
+			connect.WithSchema(mangaServiceDeletePluginMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		cancelJob: connect.NewClient[v1.CancelJobRequest, v1.CancelJobResponse](
+		searchPlugin: connect.NewClient[v1.SearchPluginRequest, v1.SearchPluginResponse](
 			httpClient,
-			baseURL+MangaServiceCancelJobProcedure,
-			connect.WithSchema(mangaServiceCancelJobMethodDescriptor),
+			baseURL+MangaServiceSearchPluginProcedure,
+			connect.WithSchema(mangaServiceSearchPluginMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		refreshManga: connect.NewClient[v1.RefreshMangaRequest, v1.RefreshMangaResponse](
+			httpClient,
+			baseURL+MangaServiceRefreshMangaProcedure,
+			connect.WithSchema(mangaServiceRefreshMangaMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -89,31 +107,42 @@ func NewMangaServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 
 // mangaServiceClient implements MangaServiceClient.
 type mangaServiceClient struct {
-	newJob    *connect.Client[v1.NewJobRequest, v1.NewJobResponse]
-	jobStatus *connect.Client[v1.JobStatusRequest, v1.JobStatusResponse]
-	cancelJob *connect.Client[v1.CancelJobRequest, v1.CancelJobResponse]
+	installPlugin *connect.Client[v1.NewPluginRequest, v1.NewPluginResponse]
+	deletePlugin  *connect.Client[v1.DeletePluginRequest, v1.DeletePluginResponse]
+	searchPlugin  *connect.Client[v1.SearchPluginRequest, v1.SearchPluginResponse]
+	refreshManga  *connect.Client[v1.RefreshMangaRequest, v1.RefreshMangaResponse]
 }
 
-// NewJob calls manga.v1.MangaService.NewJob.
-func (c *mangaServiceClient) NewJob(ctx context.Context, req *connect.Request[v1.NewJobRequest]) (*connect.Response[v1.NewJobResponse], error) {
-	return c.newJob.CallUnary(ctx, req)
+// InstallPlugin calls manga.v1.MangaService.InstallPlugin.
+func (c *mangaServiceClient) InstallPlugin(ctx context.Context, req *connect.Request[v1.NewPluginRequest]) (*connect.Response[v1.NewPluginResponse], error) {
+	return c.installPlugin.CallUnary(ctx, req)
 }
 
-// JobStatus calls manga.v1.MangaService.JobStatus.
-func (c *mangaServiceClient) JobStatus(ctx context.Context, req *connect.Request[v1.JobStatusRequest]) (*connect.Response[v1.JobStatusResponse], error) {
-	return c.jobStatus.CallUnary(ctx, req)
+// DeletePlugin calls manga.v1.MangaService.DeletePlugin.
+func (c *mangaServiceClient) DeletePlugin(ctx context.Context, req *connect.Request[v1.DeletePluginRequest]) (*connect.Response[v1.DeletePluginResponse], error) {
+	return c.deletePlugin.CallUnary(ctx, req)
 }
 
-// CancelJob calls manga.v1.MangaService.CancelJob.
-func (c *mangaServiceClient) CancelJob(ctx context.Context, req *connect.Request[v1.CancelJobRequest]) (*connect.Response[v1.CancelJobResponse], error) {
-	return c.cancelJob.CallUnary(ctx, req)
+// SearchPlugin calls manga.v1.MangaService.SearchPlugin.
+func (c *mangaServiceClient) SearchPlugin(ctx context.Context, req *connect.Request[v1.SearchPluginRequest]) (*connect.Response[v1.SearchPluginResponse], error) {
+	return c.searchPlugin.CallUnary(ctx, req)
+}
+
+// RefreshManga calls manga.v1.MangaService.RefreshManga.
+func (c *mangaServiceClient) RefreshManga(ctx context.Context, req *connect.Request[v1.RefreshMangaRequest]) (*connect.Response[v1.RefreshMangaResponse], error) {
+	return c.refreshManga.CallUnary(ctx, req)
 }
 
 // MangaServiceHandler is an implementation of the manga.v1.MangaService service.
 type MangaServiceHandler interface {
-	NewJob(context.Context, *connect.Request[v1.NewJobRequest]) (*connect.Response[v1.NewJobResponse], error)
-	JobStatus(context.Context, *connect.Request[v1.JobStatusRequest]) (*connect.Response[v1.JobStatusResponse], error)
-	CancelJob(context.Context, *connect.Request[v1.CancelJobRequest]) (*connect.Response[v1.CancelJobResponse], error)
+	// install a new plugin
+	InstallPlugin(context.Context, *connect.Request[v1.NewPluginRequest]) (*connect.Response[v1.NewPluginResponse], error)
+	// delete plugin
+	DeletePlugin(context.Context, *connect.Request[v1.DeletePluginRequest]) (*connect.Response[v1.DeletePluginResponse], error)
+	// search plugin
+	SearchPlugin(context.Context, *connect.Request[v1.SearchPluginRequest]) (*connect.Response[v1.SearchPluginResponse], error)
+	// refresh manga
+	RefreshManga(context.Context, *connect.Request[v1.RefreshMangaRequest]) (*connect.Response[v1.RefreshMangaResponse], error)
 }
 
 // NewMangaServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -122,32 +151,40 @@ type MangaServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewMangaServiceHandler(svc MangaServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	mangaServiceNewJobHandler := connect.NewUnaryHandler(
-		MangaServiceNewJobProcedure,
-		svc.NewJob,
-		connect.WithSchema(mangaServiceNewJobMethodDescriptor),
+	mangaServiceInstallPluginHandler := connect.NewUnaryHandler(
+		MangaServiceInstallPluginProcedure,
+		svc.InstallPlugin,
+		connect.WithSchema(mangaServiceInstallPluginMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
-	mangaServiceJobStatusHandler := connect.NewUnaryHandler(
-		MangaServiceJobStatusProcedure,
-		svc.JobStatus,
-		connect.WithSchema(mangaServiceJobStatusMethodDescriptor),
+	mangaServiceDeletePluginHandler := connect.NewUnaryHandler(
+		MangaServiceDeletePluginProcedure,
+		svc.DeletePlugin,
+		connect.WithSchema(mangaServiceDeletePluginMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
-	mangaServiceCancelJobHandler := connect.NewUnaryHandler(
-		MangaServiceCancelJobProcedure,
-		svc.CancelJob,
-		connect.WithSchema(mangaServiceCancelJobMethodDescriptor),
+	mangaServiceSearchPluginHandler := connect.NewUnaryHandler(
+		MangaServiceSearchPluginProcedure,
+		svc.SearchPlugin,
+		connect.WithSchema(mangaServiceSearchPluginMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	mangaServiceRefreshMangaHandler := connect.NewUnaryHandler(
+		MangaServiceRefreshMangaProcedure,
+		svc.RefreshManga,
+		connect.WithSchema(mangaServiceRefreshMangaMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/manga.v1.MangaService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case MangaServiceNewJobProcedure:
-			mangaServiceNewJobHandler.ServeHTTP(w, r)
-		case MangaServiceJobStatusProcedure:
-			mangaServiceJobStatusHandler.ServeHTTP(w, r)
-		case MangaServiceCancelJobProcedure:
-			mangaServiceCancelJobHandler.ServeHTTP(w, r)
+		case MangaServiceInstallPluginProcedure:
+			mangaServiceInstallPluginHandler.ServeHTTP(w, r)
+		case MangaServiceDeletePluginProcedure:
+			mangaServiceDeletePluginHandler.ServeHTTP(w, r)
+		case MangaServiceSearchPluginProcedure:
+			mangaServiceSearchPluginHandler.ServeHTTP(w, r)
+		case MangaServiceRefreshMangaProcedure:
+			mangaServiceRefreshMangaHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -157,14 +194,18 @@ func NewMangaServiceHandler(svc MangaServiceHandler, opts ...connect.HandlerOpti
 // UnimplementedMangaServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedMangaServiceHandler struct{}
 
-func (UnimplementedMangaServiceHandler) NewJob(context.Context, *connect.Request[v1.NewJobRequest]) (*connect.Response[v1.NewJobResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.NewJob is not implemented"))
+func (UnimplementedMangaServiceHandler) InstallPlugin(context.Context, *connect.Request[v1.NewPluginRequest]) (*connect.Response[v1.NewPluginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.InstallPlugin is not implemented"))
 }
 
-func (UnimplementedMangaServiceHandler) JobStatus(context.Context, *connect.Request[v1.JobStatusRequest]) (*connect.Response[v1.JobStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.JobStatus is not implemented"))
+func (UnimplementedMangaServiceHandler) DeletePlugin(context.Context, *connect.Request[v1.DeletePluginRequest]) (*connect.Response[v1.DeletePluginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.DeletePlugin is not implemented"))
 }
 
-func (UnimplementedMangaServiceHandler) CancelJob(context.Context, *connect.Request[v1.CancelJobRequest]) (*connect.Response[v1.CancelJobResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.CancelJob is not implemented"))
+func (UnimplementedMangaServiceHandler) SearchPlugin(context.Context, *connect.Request[v1.SearchPluginRequest]) (*connect.Response[v1.SearchPluginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.SearchPlugin is not implemented"))
+}
+
+func (UnimplementedMangaServiceHandler) RefreshManga(context.Context, *connect.Request[v1.RefreshMangaRequest]) (*connect.Response[v1.RefreshMangaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("manga.v1.MangaService.RefreshManga is not implemented"))
 }
