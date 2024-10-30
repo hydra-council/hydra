@@ -13,41 +13,162 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use newPluginRequestDescriptor instead')
-const NewPluginRequest$json = {
-  '1': 'NewPluginRequest',
+@$core.Deprecated('Use installRepoRequestDescriptor instead')
+const InstallRepoRequest$json = {
+  '1': 'InstallRepoRequest',
+  '2': [
+    {'1': 'repoJsonUrl', '3': 1, '4': 1, '5': 9, '10': 'repoJsonUrl'},
+  ],
 };
 
-/// Descriptor for `NewPluginRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List newPluginRequestDescriptor = $convert.base64Decode(
-    'ChBOZXdQbHVnaW5SZXF1ZXN0');
+/// Descriptor for `InstallRepoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List installRepoRequestDescriptor = $convert.base64Decode(
+    'ChJJbnN0YWxsUmVwb1JlcXVlc3QSIAoLcmVwb0pzb25VcmwYASABKAlSC3JlcG9Kc29uVXJs');
 
-@$core.Deprecated('Use newPluginResponseDescriptor instead')
-const NewPluginResponse$json = {
-  '1': 'NewPluginResponse',
+@$core.Deprecated('Use installRepoResponseDescriptor instead')
+const InstallRepoResponse$json = {
+  '1': 'InstallRepoResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 9, '10': 'status'},
+  ],
 };
 
-/// Descriptor for `NewPluginResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List newPluginResponseDescriptor = $convert.base64Decode(
-    'ChFOZXdQbHVnaW5SZXNwb25zZQ==');
+/// Descriptor for `InstallRepoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List installRepoResponseDescriptor = $convert.base64Decode(
+    'ChNJbnN0YWxsUmVwb1Jlc3BvbnNlEhYKBnN0YXR1cxgBIAEoCVIGc3RhdHVz');
 
-@$core.Deprecated('Use deletePluginRequestDescriptor instead')
-const DeletePluginRequest$json = {
-  '1': 'DeletePluginRequest',
+@$core.Deprecated('Use repoRequestDescriptor instead')
+const RepoRequest$json = {
+  '1': 'RepoRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+  ],
 };
 
-/// Descriptor for `DeletePluginRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deletePluginRequestDescriptor = $convert.base64Decode(
-    'ChNEZWxldGVQbHVnaW5SZXF1ZXN0');
+/// Descriptor for `RepoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List repoRequestDescriptor = $convert.base64Decode(
+    'CgtSZXBvUmVxdWVzdBIOCgJpZBgBIAEoA1ICaWQ=');
 
-@$core.Deprecated('Use deletePluginResponseDescriptor instead')
-const DeletePluginResponse$json = {
-  '1': 'DeletePluginResponse',
+@$core.Deprecated('Use repoResponseDescriptor instead')
+const RepoResponse$json = {
+  '1': 'RepoResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 9, '10': 'status'},
+  ],
 };
 
-/// Descriptor for `DeletePluginResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deletePluginResponseDescriptor = $convert.base64Decode(
-    'ChREZWxldGVQbHVnaW5SZXNwb25zZQ==');
+/// Descriptor for `RepoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List repoResponseDescriptor = $convert.base64Decode(
+    'CgxSZXBvUmVzcG9uc2USFgoGc3RhdHVzGAEgASgJUgZzdGF0dXM=');
+
+@$core.Deprecated('Use listRepoRequestDescriptor instead')
+const ListRepoRequest$json = {
+  '1': 'ListRepoRequest',
+};
+
+/// Descriptor for `ListRepoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRepoRequestDescriptor = $convert.base64Decode(
+    'Cg9MaXN0UmVwb1JlcXVlc3Q=');
+
+@$core.Deprecated('Use listRepoResponseDescriptor instead')
+const ListRepoResponse$json = {
+  '1': 'ListRepoResponse',
+  '2': [
+    {'1': 'repos', '3': 1, '4': 3, '5': 11, '6': '.manga.v1.ExtensionRepo', '10': 'repos'},
+  ],
+};
+
+/// Descriptor for `ListRepoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRepoResponseDescriptor = $convert.base64Decode(
+    'ChBMaXN0UmVwb1Jlc3BvbnNlEi0KBXJlcG9zGAEgAygLMhcubWFuZ2EudjEuRXh0ZW5zaW9uUm'
+    'Vwb1IFcmVwb3M=');
+
+@$core.Deprecated('Use extensionRepoDescriptor instead')
+const ExtensionRepo$json = {
+  '1': 'ExtensionRepo',
+  '2': [
+    {'1': 'repoName', '3': 1, '4': 1, '5': 9, '10': 'repoName'},
+    {'1': 'repoUrl', '3': 2, '4': 1, '5': 9, '10': 'repoUrl'},
+    {'1': 'jsonRepoUrl', '3': 3, '4': 1, '5': 9, '10': 'jsonRepoUrl'},
+    {'1': 'version', '3': 4, '4': 1, '5': 9, '10': 'version'},
+    {'1': 'manifest_version', '3': 5, '4': 1, '5': 9, '10': 'manifestVersion'},
+  ],
+};
+
+/// Descriptor for `ExtensionRepo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List extensionRepoDescriptor = $convert.base64Decode(
+    'Cg1FeHRlbnNpb25SZXBvEhoKCHJlcG9OYW1lGAEgASgJUghyZXBvTmFtZRIYCgdyZXBvVXJsGA'
+    'IgASgJUgdyZXBvVXJsEiAKC2pzb25SZXBvVXJsGAMgASgJUgtqc29uUmVwb1VybBIYCgd2ZXJz'
+    'aW9uGAQgASgJUgd2ZXJzaW9uEikKEG1hbmlmZXN0X3ZlcnNpb24YBSABKAlSD21hbmlmZXN0Vm'
+    'Vyc2lvbg==');
+
+@$core.Deprecated('Use extensionRequestDescriptor instead')
+const ExtensionRequest$json = {
+  '1': 'ExtensionRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `ExtensionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List extensionRequestDescriptor = $convert.base64Decode(
+    'ChBFeHRlbnNpb25SZXF1ZXN0Eg4KAmlkGAEgASgDUgJpZA==');
+
+@$core.Deprecated('Use extensionResponseDescriptor instead')
+const ExtensionResponse$json = {
+  '1': 'ExtensionResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 9, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `ExtensionResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List extensionResponseDescriptor = $convert.base64Decode(
+    'ChFFeHRlbnNpb25SZXNwb25zZRIWCgZzdGF0dXMYASABKAlSBnN0YXR1cw==');
+
+@$core.Deprecated('Use listExtensionRequestDescriptor instead')
+const ListExtensionRequest$json = {
+  '1': 'ListExtensionRequest',
+};
+
+/// Descriptor for `ListExtensionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listExtensionRequestDescriptor = $convert.base64Decode(
+    'ChRMaXN0RXh0ZW5zaW9uUmVxdWVzdA==');
+
+@$core.Deprecated('Use listExtensionResponseDescriptor instead')
+const ListExtensionResponse$json = {
+  '1': 'ListExtensionResponse',
+  '2': [
+    {'1': 'extensions', '3': 1, '4': 3, '5': 11, '6': '.manga.v1.Extension', '10': 'extensions'},
+  ],
+};
+
+/// Descriptor for `ListExtensionResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listExtensionResponseDescriptor = $convert.base64Decode(
+    'ChVMaXN0RXh0ZW5zaW9uUmVzcG9uc2USMwoKZXh0ZW5zaW9ucxgBIAMoCzITLm1hbmdhLnYxLk'
+    'V4dGVuc2lvblIKZXh0ZW5zaW9ucw==');
+
+@$core.Deprecated('Use extensionDescriptor instead')
+const Extension$json = {
+  '1': 'Extension',
+  '2': [
+    {'1': 'extensionName', '3': 1, '4': 1, '5': 9, '10': 'extensionName'},
+    {'1': 'manifest_version', '3': 2, '4': 1, '5': 9, '10': 'manifestVersion'},
+    {'1': 'version', '3': 3, '4': 1, '5': 9, '10': 'version'},
+    {'1': 'media_type', '3': 4, '4': 1, '5': 9, '10': 'mediaType'},
+    {'1': 'repoUrl', '3': 5, '4': 1, '5': 9, '10': 'repoUrl'},
+    {'1': 'scriptUrl', '3': 6, '4': 1, '5': 9, '10': 'scriptUrl'},
+    {'1': 'metaDataUrl', '3': 7, '4': 1, '5': 9, '10': 'metaDataUrl'},
+  ],
+};
+
+/// Descriptor for `Extension`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List extensionDescriptor = $convert.base64Decode(
+    'CglFeHRlbnNpb24SJAoNZXh0ZW5zaW9uTmFtZRgBIAEoCVINZXh0ZW5zaW9uTmFtZRIpChBtYW'
+    '5pZmVzdF92ZXJzaW9uGAIgASgJUg9tYW5pZmVzdFZlcnNpb24SGAoHdmVyc2lvbhgDIAEoCVIH'
+    'dmVyc2lvbhIdCgptZWRpYV90eXBlGAQgASgJUgltZWRpYVR5cGUSGAoHcmVwb1VybBgFIAEoCV'
+    'IHcmVwb1VybBIcCglzY3JpcHRVcmwYBiABKAlSCXNjcmlwdFVybBIgCgttZXRhRGF0YVVybBgH'
+    'IAEoCVILbWV0YURhdGFVcmw=');
 
 @$core.Deprecated('Use searchPluginRequestDescriptor instead')
 const SearchPluginRequest$json = {
@@ -66,11 +187,14 @@ final $typed_data.Uint8List searchPluginRequestDescriptor = $convert.base64Decod
 @$core.Deprecated('Use searchPluginResponseDescriptor instead')
 const SearchPluginResponse$json = {
   '1': 'SearchPluginResponse',
+  '2': [
+    {'1': 'pong', '3': 1, '4': 1, '5': 9, '10': 'pong'},
+  ],
 };
 
 /// Descriptor for `SearchPluginResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchPluginResponseDescriptor = $convert.base64Decode(
-    'ChRTZWFyY2hQbHVnaW5SZXNwb25zZQ==');
+    'ChRTZWFyY2hQbHVnaW5SZXNwb25zZRISCgRwb25nGAEgASgJUgRwb25n');
 
 @$core.Deprecated('Use refreshMangaResponseDescriptor instead')
 const RefreshMangaResponse$json = {

@@ -9,9 +9,10 @@ mkdir -p generated/python generated/dart generated/node generated/go
 
 # Generate Python gRPC stubs
 python3.12 -m grpc_tools.protoc \
-    -I./protos \
+    -Igenerated=./protos \
     --python_out=./generated/python \
     --grpc_python_out=./generated/python \
+    --pyi_out=./generated/python \
     ./protos/**/**/**/*.proto
 
 # Generate Dart gRPC stubs

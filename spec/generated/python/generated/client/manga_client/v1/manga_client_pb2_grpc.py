@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from client.manga_client.v1 import manga_client_pb2 as client_dot_manga__client_dot_v1_dot_manga__client__pb2
+from generated.client.manga_client.v1 import manga_client_pb2 as generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2
 
 GRPC_GENERATED_VERSION = '1.67.0'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in client/manga_client/v1/manga_client_pb2_grpc.py depends on'
+        + f' but the generated code in generated/client/manga_client/v1/manga_client_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,18 +36,18 @@ class MangaClientServiceStub(object):
         """
         self.NewJob = channel.unary_unary(
                 '/manga_client.v1.MangaClientService/NewJob',
-                request_serializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobRequest.SerializeToString,
-                response_deserializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobResponse.FromString,
+                request_serializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobRequest.SerializeToString,
+                response_deserializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobResponse.FromString,
                 _registered_method=True)
         self.JobStatus = channel.unary_unary(
                 '/manga_client.v1.MangaClientService/JobStatus',
-                request_serializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusRequest.SerializeToString,
-                response_deserializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusResponse.FromString,
+                request_serializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusRequest.SerializeToString,
+                response_deserializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusResponse.FromString,
                 _registered_method=True)
         self.CancelJob = channel.unary_unary(
                 '/manga_client.v1.MangaClientService/CancelJob',
-                request_serializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobRequest.SerializeToString,
-                response_deserializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobResponse.FromString,
+                request_serializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobRequest.SerializeToString,
+                response_deserializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobResponse.FromString,
                 _registered_method=True)
 
 
@@ -77,18 +77,18 @@ def add_MangaClientServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'NewJob': grpc.unary_unary_rpc_method_handler(
                     servicer.NewJob,
-                    request_deserializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobRequest.FromString,
-                    response_serializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobResponse.SerializeToString,
+                    request_deserializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobRequest.FromString,
+                    response_serializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobResponse.SerializeToString,
             ),
             'JobStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.JobStatus,
-                    request_deserializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusRequest.FromString,
-                    response_serializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusResponse.SerializeToString,
+                    request_deserializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusRequest.FromString,
+                    response_serializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusResponse.SerializeToString,
             ),
             'CancelJob': grpc.unary_unary_rpc_method_handler(
                     servicer.CancelJob,
-                    request_deserializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobRequest.FromString,
-                    response_serializer=client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobResponse.SerializeToString,
+                    request_deserializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobRequest.FromString,
+                    response_serializer=generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -116,8 +116,8 @@ class MangaClientService(object):
             request,
             target,
             '/manga_client.v1.MangaClientService/NewJob',
-            client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobRequest.SerializeToString,
-            client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobResponse.FromString,
+            generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobRequest.SerializeToString,
+            generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.NewJobResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -143,8 +143,8 @@ class MangaClientService(object):
             request,
             target,
             '/manga_client.v1.MangaClientService/JobStatus',
-            client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusRequest.SerializeToString,
-            client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusResponse.FromString,
+            generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusRequest.SerializeToString,
+            generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.JobStatusResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -170,8 +170,8 @@ class MangaClientService(object):
             request,
             target,
             '/manga_client.v1.MangaClientService/CancelJob',
-            client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobRequest.SerializeToString,
-            client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobResponse.FromString,
+            generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobRequest.SerializeToString,
+            generated_dot_client_dot_manga__client_dot_v1_dot_manga__client__pb2.CancelJobResponse.FromString,
             options,
             channel_credentials,
             insecure,

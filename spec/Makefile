@@ -1,3 +1,11 @@
+# generate and copy out go files and remove go generated dir
+gen:
+	docker compose --profile grpc-gen up --build
+	mkdir -p ../generated
+	cp -r generated/go/servers* ../generated
+	cp -r generated/go/client* ../generated
+	rm -rf generated/go
+
 # drop into a shell and interact with the image
 # CTRL+D to exit
 it:
@@ -10,11 +18,3 @@ build:
 bpsh:
 	make build
 	make push
-
-# generate and copy out go files and remove go generated dir
-gen:
-	docker compose --profile grpc-gen up --build
-	mkdir -p ../generated
-	cp -r generated/go/servers* ../generated
-	cp -r generated/go/client* ../generated
-	rm -rf generated/go

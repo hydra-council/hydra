@@ -21,14 +21,6 @@ export 'manga.pb.dart';
 
 @$pb.GrpcServiceName('manga.v1.MangaService')
 class MangaServiceClient extends $grpc.Client {
-  static final _$installPlugin = $grpc.ClientMethod<$1.NewPluginRequest, $1.NewPluginResponse>(
-      '/manga.v1.MangaService/InstallPlugin',
-      ($1.NewPluginRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.NewPluginResponse.fromBuffer(value));
-  static final _$deletePlugin = $grpc.ClientMethod<$1.DeletePluginRequest, $1.DeletePluginResponse>(
-      '/manga.v1.MangaService/DeletePlugin',
-      ($1.DeletePluginRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.DeletePluginResponse.fromBuffer(value));
   static final _$searchPlugin = $grpc.ClientMethod<$1.SearchPluginRequest, $1.SearchPluginResponse>(
       '/manga.v1.MangaService/SearchPlugin',
       ($1.SearchPluginRequest value) => value.writeToBuffer(),
@@ -37,20 +29,44 @@ class MangaServiceClient extends $grpc.Client {
       '/manga.v1.MangaService/RefreshManga',
       ($1.RefreshMangaRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.RefreshMangaResponse.fromBuffer(value));
+  static final _$installRepo = $grpc.ClientMethod<$1.InstallRepoRequest, $1.InstallRepoResponse>(
+      '/manga.v1.MangaService/InstallRepo',
+      ($1.InstallRepoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.InstallRepoResponse.fromBuffer(value));
+  static final _$unInstallRepo = $grpc.ClientMethod<$1.RepoRequest, $1.RepoResponse>(
+      '/manga.v1.MangaService/UnInstallRepo',
+      ($1.RepoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.RepoResponse.fromBuffer(value));
+  static final _$updateRepo = $grpc.ClientMethod<$1.RepoRequest, $1.RepoResponse>(
+      '/manga.v1.MangaService/UpdateRepo',
+      ($1.RepoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.RepoResponse.fromBuffer(value));
+  static final _$listRepos = $grpc.ClientMethod<$1.ListRepoRequest, $1.ListRepoResponse>(
+      '/manga.v1.MangaService/ListRepos',
+      ($1.ListRepoRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.ListRepoResponse.fromBuffer(value));
+  static final _$installExtension = $grpc.ClientMethod<$1.ExtensionRequest, $1.ExtensionResponse>(
+      '/manga.v1.MangaService/InstallExtension',
+      ($1.ExtensionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.ExtensionResponse.fromBuffer(value));
+  static final _$unInstallExtension = $grpc.ClientMethod<$1.ExtensionRequest, $1.ExtensionResponse>(
+      '/manga.v1.MangaService/UnInstallExtension',
+      ($1.ExtensionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.ExtensionResponse.fromBuffer(value));
+  static final _$updateExtension = $grpc.ClientMethod<$1.ExtensionRequest, $1.ExtensionResponse>(
+      '/manga.v1.MangaService/UpdateExtension',
+      ($1.ExtensionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.ExtensionResponse.fromBuffer(value));
+  static final _$listExtensions = $grpc.ClientMethod<$1.ListExtensionRequest, $1.ListExtensionResponse>(
+      '/manga.v1.MangaService/ListExtensions',
+      ($1.ListExtensionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.ListExtensionResponse.fromBuffer(value));
 
   MangaServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
         interceptors: interceptors);
-
-  $grpc.ResponseFuture<$1.NewPluginResponse> installPlugin($1.NewPluginRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$installPlugin, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$1.DeletePluginResponse> deletePlugin($1.DeletePluginRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$deletePlugin, request, options: options);
-  }
 
   $grpc.ResponseFuture<$1.SearchPluginResponse> searchPlugin($1.SearchPluginRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchPlugin, request, options: options);
@@ -59,6 +75,38 @@ class MangaServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.RefreshMangaResponse> refreshManga($1.RefreshMangaRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$refreshManga, request, options: options);
   }
+
+  $grpc.ResponseFuture<$1.InstallRepoResponse> installRepo($1.InstallRepoRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$installRepo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.RepoResponse> unInstallRepo($1.RepoRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$unInstallRepo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.RepoResponse> updateRepo($1.RepoRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateRepo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.ListRepoResponse> listRepos($1.ListRepoRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listRepos, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.ExtensionResponse> installExtension($1.ExtensionRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$installExtension, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.ExtensionResponse> unInstallExtension($1.ExtensionRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$unInstallExtension, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.ExtensionResponse> updateExtension($1.ExtensionRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateExtension, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.ListExtensionResponse> listExtensions($1.ListExtensionRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listExtensions, request, options: options);
+  }
 }
 
 @$pb.GrpcServiceName('manga.v1.MangaService')
@@ -66,20 +114,6 @@ abstract class MangaServiceBase extends $grpc.Service {
   $core.String get $name => 'manga.v1.MangaService';
 
   MangaServiceBase() {
-    $addMethod($grpc.ServiceMethod<$1.NewPluginRequest, $1.NewPluginResponse>(
-        'InstallPlugin',
-        installPlugin_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.NewPluginRequest.fromBuffer(value),
-        ($1.NewPluginResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.DeletePluginRequest, $1.DeletePluginResponse>(
-        'DeletePlugin',
-        deletePlugin_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.DeletePluginRequest.fromBuffer(value),
-        ($1.DeletePluginResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.SearchPluginRequest, $1.SearchPluginResponse>(
         'SearchPlugin',
         searchPlugin_Pre,
@@ -94,14 +128,62 @@ abstract class MangaServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.RefreshMangaRequest.fromBuffer(value),
         ($1.RefreshMangaResponse value) => value.writeToBuffer()));
-  }
-
-  $async.Future<$1.NewPluginResponse> installPlugin_Pre($grpc.ServiceCall call, $async.Future<$1.NewPluginRequest> request) async {
-    return installPlugin(call, await request);
-  }
-
-  $async.Future<$1.DeletePluginResponse> deletePlugin_Pre($grpc.ServiceCall call, $async.Future<$1.DeletePluginRequest> request) async {
-    return deletePlugin(call, await request);
+    $addMethod($grpc.ServiceMethod<$1.InstallRepoRequest, $1.InstallRepoResponse>(
+        'InstallRepo',
+        installRepo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.InstallRepoRequest.fromBuffer(value),
+        ($1.InstallRepoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.RepoRequest, $1.RepoResponse>(
+        'UnInstallRepo',
+        unInstallRepo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.RepoRequest.fromBuffer(value),
+        ($1.RepoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.RepoRequest, $1.RepoResponse>(
+        'UpdateRepo',
+        updateRepo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.RepoRequest.fromBuffer(value),
+        ($1.RepoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ListRepoRequest, $1.ListRepoResponse>(
+        'ListRepos',
+        listRepos_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.ListRepoRequest.fromBuffer(value),
+        ($1.ListRepoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ExtensionRequest, $1.ExtensionResponse>(
+        'InstallExtension',
+        installExtension_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.ExtensionRequest.fromBuffer(value),
+        ($1.ExtensionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ExtensionRequest, $1.ExtensionResponse>(
+        'UnInstallExtension',
+        unInstallExtension_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.ExtensionRequest.fromBuffer(value),
+        ($1.ExtensionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ExtensionRequest, $1.ExtensionResponse>(
+        'UpdateExtension',
+        updateExtension_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.ExtensionRequest.fromBuffer(value),
+        ($1.ExtensionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ListExtensionRequest, $1.ListExtensionResponse>(
+        'ListExtensions',
+        listExtensions_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.ListExtensionRequest.fromBuffer(value),
+        ($1.ListExtensionResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.SearchPluginResponse> searchPlugin_Pre($grpc.ServiceCall call, $async.Future<$1.SearchPluginRequest> request) async {
@@ -112,8 +194,46 @@ abstract class MangaServiceBase extends $grpc.Service {
     return refreshManga(call, await request);
   }
 
-  $async.Future<$1.NewPluginResponse> installPlugin($grpc.ServiceCall call, $1.NewPluginRequest request);
-  $async.Future<$1.DeletePluginResponse> deletePlugin($grpc.ServiceCall call, $1.DeletePluginRequest request);
+  $async.Future<$1.InstallRepoResponse> installRepo_Pre($grpc.ServiceCall call, $async.Future<$1.InstallRepoRequest> request) async {
+    return installRepo(call, await request);
+  }
+
+  $async.Future<$1.RepoResponse> unInstallRepo_Pre($grpc.ServiceCall call, $async.Future<$1.RepoRequest> request) async {
+    return unInstallRepo(call, await request);
+  }
+
+  $async.Future<$1.RepoResponse> updateRepo_Pre($grpc.ServiceCall call, $async.Future<$1.RepoRequest> request) async {
+    return updateRepo(call, await request);
+  }
+
+  $async.Future<$1.ListRepoResponse> listRepos_Pre($grpc.ServiceCall call, $async.Future<$1.ListRepoRequest> request) async {
+    return listRepos(call, await request);
+  }
+
+  $async.Future<$1.ExtensionResponse> installExtension_Pre($grpc.ServiceCall call, $async.Future<$1.ExtensionRequest> request) async {
+    return installExtension(call, await request);
+  }
+
+  $async.Future<$1.ExtensionResponse> unInstallExtension_Pre($grpc.ServiceCall call, $async.Future<$1.ExtensionRequest> request) async {
+    return unInstallExtension(call, await request);
+  }
+
+  $async.Future<$1.ExtensionResponse> updateExtension_Pre($grpc.ServiceCall call, $async.Future<$1.ExtensionRequest> request) async {
+    return updateExtension(call, await request);
+  }
+
+  $async.Future<$1.ListExtensionResponse> listExtensions_Pre($grpc.ServiceCall call, $async.Future<$1.ListExtensionRequest> request) async {
+    return listExtensions(call, await request);
+  }
+
   $async.Future<$1.SearchPluginResponse> searchPlugin($grpc.ServiceCall call, $1.SearchPluginRequest request);
   $async.Future<$1.RefreshMangaResponse> refreshManga($grpc.ServiceCall call, $1.RefreshMangaRequest request);
+  $async.Future<$1.InstallRepoResponse> installRepo($grpc.ServiceCall call, $1.InstallRepoRequest request);
+  $async.Future<$1.RepoResponse> unInstallRepo($grpc.ServiceCall call, $1.RepoRequest request);
+  $async.Future<$1.RepoResponse> updateRepo($grpc.ServiceCall call, $1.RepoRequest request);
+  $async.Future<$1.ListRepoResponse> listRepos($grpc.ServiceCall call, $1.ListRepoRequest request);
+  $async.Future<$1.ExtensionResponse> installExtension($grpc.ServiceCall call, $1.ExtensionRequest request);
+  $async.Future<$1.ExtensionResponse> unInstallExtension($grpc.ServiceCall call, $1.ExtensionRequest request);
+  $async.Future<$1.ExtensionResponse> updateExtension($grpc.ServiceCall call, $1.ExtensionRequest request);
+  $async.Future<$1.ListExtensionResponse> listExtensions($grpc.ServiceCall call, $1.ListExtensionRequest request);
 }

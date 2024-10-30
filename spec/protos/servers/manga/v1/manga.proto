@@ -5,36 +5,92 @@ package manga.v1;
 option go_package = "hydra/generated/servers/manga/v1";
 
 service MangaService {
-  // install a new plugin
-  rpc InstallPlugin(NewPluginRequest) returns (NewPluginResponse) {}
-  // delete plugin
-  rpc DeletePlugin(DeletePluginRequest) returns (DeletePluginResponse) {}
   // search plugin
   rpc SearchPlugin(SearchPluginRequest) returns (SearchPluginResponse) {}
   // refresh manga
   rpc RefreshManga(RefreshMangaRequest) returns (RefreshMangaResponse) {}
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // repo management
+  rpc InstallRepo(InstallRepoRequest) returns (InstallRepoResponse) {}
+  rpc UnInstallRepo(RepoRequest) returns (RepoResponse) {}
+  rpc UpdateRepo(RepoRequest) returns (RepoResponse) {}
+  rpc ListRepos(ListRepoRequest) returns (ListRepoResponse) {}
+  // extension management
+  rpc InstallExtension(ExtensionRequest) returns (ExtensionResponse) {}
+  rpc UnInstallExtension(ExtensionRequest) returns (ExtensionResponse) {}
+  rpc UpdateExtension(ExtensionRequest) returns (ExtensionResponse) {}
+  rpc ListExtensions(ListExtensionRequest) returns (ListExtensionResponse) {}
 }
 
-
-message NewPluginRequest {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Repo stuff
+message InstallRepoRequest {
+  string repoJsonUrl = 1;
 }
 
-message NewPluginResponse {
+message InstallRepoResponse {
+  string status = 1;
 }
 
-message DeletePluginRequest {
+message RepoRequest {
+  int64 id = 1;
 }
 
-message DeletePluginResponse {
+message RepoResponse {
+  string status = 1;
 }
 
+message ListRepoRequest {}
+
+message ListRepoResponse {
+  repeated ExtensionRepo repos = 1;
+}
+
+message ExtensionRepo {
+  string repoName = 1;
+  string repoUrl = 2;
+  string jsonRepoUrl = 3;
+  string version = 4;
+  string manifest_version = 5;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Extension stuff
+message ExtensionRequest {
+  int64 id = 1;
+}
+
+message ExtensionResponse {
+  string status = 1;
+}
+
+message ListExtensionRequest {}
+
+message ListExtensionResponse {
+  repeated Extension extensions = 1;
+}
+
+message Extension {
+  string extensionName = 1;
+  string manifest_version = 2;
+  string version = 3;
+  string media_type = 4;
+  string repoUrl = 5;
+  string scriptUrl = 6;
+  string metaDataUrl = 7;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Manga controls
 
 message SearchPluginRequest {
   string searchQuery = 1;
   string pluginID = 2;
 }
 
-message SearchPluginResponse {}
+message SearchPluginResponse {
+  string pong = 1;
+}
 
 message RefreshMangaResponse {}
 
