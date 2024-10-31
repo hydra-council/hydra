@@ -1,0 +1,10 @@
+services:
+  leviathan:
+    image: leviathan:dev
+    build:
+      context: .
+    ports:
+      - "9221:9221"
+#    volumes:
+#      - ./appdata/:/app/appdata
+    restart: "no"
