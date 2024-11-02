@@ -1,4 +1,4 @@
-package tests
+package plugin_manager
 
 func main() {
 	// todo tests

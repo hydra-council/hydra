@@ -10,8 +10,8 @@ import (
 	models "hydra/models"
 	"io"
 	"net/http"
-	"net/url"
 	"os"
+	"path"
 	"path/filepath"
 	"slices"
 )
@@ -106,7 +106,7 @@ func (pm *PluginManager) SavePlugin(url string, repoId uint) error {
 func (pm *PluginManager) InstallPlugin(pluginId uint) error {
 	var plugin models.Plugin
 
-	pm.Database.Select("script_url", "display_name").First(&plugin, pluginId)
+	pm.Database.Select("script_url", "display_name", "id").First(&plugin, pluginId)
 	if pm.Database.Error != nil {
 		return fmt.Errorf("could not find plugin with id %d, err: %v", pluginId, pm.Database.Error)
 	}
@@ -125,18 +125,28 @@ func (pm *PluginManager) InstallPlugin(pluginId uint) error {
 		return fmt.Errorf("failed to generate plugin UUID: %v", err)
 	}
 
-	fullPluginFolder := filepath.Join(pluginDir, folderId.String())
+	fullPluginFolder, err := filepath.Abs(filepath.Join(pluginDir, folderId.String()))
+	if err != nil {
+		return fmt.Errorf("failed to get absloute path for plugin folder: %v", err)
+	}
+
 	err = os.MkdirAll(fullPluginFolder, 0640)
 	if err != nil {
 		return fmt.Errorf("failed to create plugin directory: at %s, err: %v", fullPluginFolder, err)
 	}
 
-	// save file with its escaped display name
-	fullPluginPath := filepath.Join(fullPluginFolder, url.QueryEscape(plugin.DisplayName))
+	// save file with from last item in the download path
+	fileName := path.Base(plugin.ScriptURL)
+	fullPluginPath := filepath.Join(fullPluginFolder, fileName)
 	// IMP NEVER GIVE EXECUTE PERMISSION
 	err = os.WriteFile(fullPluginPath, body, 0640)
 	if err != nil {
 		return fmt.Errorf("failed to write plugin file to path:%s, err: %v", fullPluginPath, err)
+	}
+
+	pm.Database.Model(&plugin).Update("script_file_url", fullPluginPath)
+	if pm.Database.Error != nil {
+		return fmt.Errorf("could not save plugin file: %v, err: %v", fullPluginPath, pm.Database.Error)
 	}
 
 	return nil
