@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package plugin.v1;
+
+option go_package = "hydra/generated/plugin/v1";
+
+import "types/plugin/v1/plugin_types.proto";
+
+service PluginService {
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // repo management
+  rpc InstallRepo(plugin_types.v1.InstallRepoRequest) returns (plugin_types.v1.InstallRepoResponse) {}
+  rpc UninstallRepo(plugin_types.v1.RepoRequest) returns (plugin_types.v1.RepoResponse) {}
+  rpc UpdateRepo(plugin_types.v1.RepoRequest) returns (plugin_types.v1.RepoResponse) {}
+  rpc ListRepos(plugin_types.v1.ListRepoRequest) returns (plugin_types.v1.ListRepoResponse) {}
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // extension management
+  rpc InstallExtension(plugin_types.v1.ExtensionRequest) returns (plugin_types.v1.ExtensionResponse) {}
+  rpc UninstallExtension(plugin_types.v1.ExtensionRequest) returns (plugin_types.v1.ExtensionResponse) {}
+  rpc UpdateExtension(plugin_types.v1.ExtensionRequest) returns (plugin_types.v1.ExtensionResponse) {}
+  rpc ListExtensions(plugin_types.v1.ListExtensionRequest) returns (plugin_types.v1.ListExtensionResponse) {}
+
+}

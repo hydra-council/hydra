@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package manga_types.v1;
+
+option go_package = "hydra/generated/types/manga/v1";
+
+message SearchPluginRequest {
+  string searchQuery = 1;
+  string pluginID = 2;
+}
+
+message SearchPluginResponse {
+  string pong = 1;
+}
+
+message RefreshMangaResponse {}
+
+message RefreshMangaRequest {}
+
+// todo add more metadata fields
+message MangaMetaData {
+  string title = 1;
+  // each name should be separated by a space
+  string alternateTile = 2;
+  repeated MangaChapter chapters = 4;
+}
+
+message MangaChapter {
+  string chapterNumber = 1;
+  string chapterName = 2;
+  string releaseDateInISO6801 = 3;
+  repeated MangaPage pages = 4;
+}
+
+message MangaPage {
+  int64 page = 1;
+  string url = 2;
+}

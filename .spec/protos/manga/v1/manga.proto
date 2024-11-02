@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package manga.v1;
+
+option go_package = "hydra/generated/manga/v1";
+
+import "types/manga/v1/manga_types.proto";
+import "types/plugin/v1/plugin_types.proto";
+
+service MangaService {
+  rpc LoadPlugin(plugin_types.v1.LoadPluginRequest) returns (plugin_types.v1.LoadPluginResponse) {}
+  // search plugin
+  rpc SearchPlugin(manga_types.v1.SearchPluginRequest) returns (manga_types.v1.SearchPluginResponse) {}
+  // refresh manga
+  rpc RefreshManga(manga_types.v1.RefreshMangaRequest) returns (manga_types.v1.RefreshMangaResponse) {}
+}
+

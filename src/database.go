@@ -7,7 +7,8 @@ import (
 )
 
 func initDatabase() *gorm.DB {
-	const databasePath = "hydra.db"
+	//todo load from config
+	const databasePath = "../hydra.db"
 
 	db, err := gorm.Open(sqlite.Open(databasePath), &gorm.Config{})
 	if err != nil {

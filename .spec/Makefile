@@ -2,8 +2,7 @@
 gen:
 	docker compose --profile grpc-gen up --build
 	mkdir -p ../src/generated
-	cp -r generated/go/servers* ../src/generated
-	cp -r generated/go/client* ../src/generated
+	cp -r generated/go/* ../src/generated
 	rm -rf generated/go
 
 # drop into a shell and interact with the image

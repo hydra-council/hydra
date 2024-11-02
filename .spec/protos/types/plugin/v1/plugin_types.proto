@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package plugin_types.v1;
+
+option go_package = "hydra/generated/types/plugin/v1";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Load plugin
+message LoadPluginRequest {
+  string pluginPath = 1;
+}
+
+message LoadPluginResponse {
+  string status = 1;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Repo stuff
+message InstallRepoRequest {
+  string repoJsonUrl = 1;
+}
+
+message InstallRepoResponse {
+  string status = 1;
+}
+
+message RepoRequest {
+  int64 id = 1;
+}
+
+message RepoResponse {
+  string status = 1;
+}
+
+message ListRepoRequest {}
+
+message ListRepoResponse {
+  repeated ExtensionRepo repos = 1;
+}
+
+message ExtensionRepo {
+  string id = 1;
+  string repoName = 2;
+  string repoUrl = 3;
+  string jsonRepoUrl = 4;
+  string version = 5;
+  int64 manifest_version = 6;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Extension stuff
+message ExtensionRequest {
+  int64 id = 1;
+}
+
+message ExtensionResponse {
+  string status = 1;
+}
+
+message ListExtensionRequest {}
+
+message ListExtensionResponse {
+  repeated Extension extensions = 1;
+}
+
+message Extension {
+  int64 id = 1;
+  string extensionName = 2;
+  int64 manifest_version = 3;
+  string version = 4;
+  string media_type = 5;
+  string repoUrl = 6;
+  string scriptUrl = 7;
+  string metaDataUrl = 8;
+}

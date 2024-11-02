@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package manga_client.v1;
+
+option go_package = "hydra/generated/manga_client/v1";
+
+//import "types/plugin/v1/plugin_types.proto";
+
+service MangaClientService {
+  rpc NewJob(NewJobRequest) returns (NewJobResponse) {}
+  rpc JobStatus(JobStatusRequest) returns (JobStatusResponse) {}
+  rpc CancelJob(CancelJobRequest) returns (CancelJobResponse) {}
+}
+
+
+message NewJobRequest {
+}
+
+message NewJobResponse {
+}
+
+message JobStatusRequest {
+}
+
+message JobStatusResponse {
+}
+
+message CancelJobRequest {
+  // You can add filters here if needed
+}
+
+message CancelJobResponse {
+}
+

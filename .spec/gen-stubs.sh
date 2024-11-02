@@ -9,17 +9,19 @@ mkdir -p generated/python generated/dart generated/node generated/go
 
 # Generate Python gRPC stubs
 python3.12 -m grpc_tools.protoc \
-    -Igenerated=./protos \
-    --python_out=./generated/python \
-    --grpc_python_out=./generated/python \
-    --pyi_out=./generated/python \
-    ./protos/**/**/**/*.proto
+  --proto_path=./protos/ \
+  -Igenerated=./protos \
+  --python_out=./generated/python \
+  --grpc_python_out=./generated/python \
+  --pyi_out=./generated/python \
+  $(find protos/ -name "*.proto")
 
 # Generate Dart gRPC stubs
 protoc \
-    -I./protos \
-    --dart_out=grpc:./generated/dart \
-    ./protos/**/**/**/*.proto
+  --proto_path=./protos/ \
+  -I./protos \
+  --dart_out=grpc:./generated/dart \
+  $(find protos/ -name "*.proto")
 
 # Generate Connect-RPC stubs using buf
 buf generate
