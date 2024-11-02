@@ -25,7 +25,7 @@ COPY --from=builder /app/src/app .
 # start go-gin in release mode
 ENV GIN_MODE=release
 
-ENV IS_DOCKER=true
+ENV HYDRA_IS_DOCKER=true
 
 EXPOSE 9221
 

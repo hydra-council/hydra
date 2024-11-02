@@ -3,36 +3,42 @@ package main
 import (
 	"connectrpc.com/connect"
 	"context"
-	"crypto/tls"
-	"golang.org/x/net/http2"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	v1 "hydra/generated/servers/manga/v1"
 	"hydra/generated/servers/manga/v1/v1connect"
-	"log"
-	"net"
+	pm "hydra/plugin_manager"
 	"net/http"
+	"os"
 	"time"
 )
 
-// newInsecureClient create a http2 client without tls.
-// ref: https://connectrpc.com/docs/go/deployment#h2c
-func newInsecureClient() *http.Client {
-	return &http.Client{
-		Transport: &http2.Transport{
-			AllowHTTP: true,
-			DialTLSContext: func(ctx context.Context, network, addr string, cfg *tls.Config) (net.Conn, error) {
-
-				// If you're also using this client for non-h2c traffic, you may want
-				// to delegate to tls.Dial if the network isn't TCP or the addr isn't
-				// in an allowlist.
-				return net.Dial(network, addr)
-			},
-			ReadIdleTimeout: 1 * time.Minute,
-			// Don't forget timeouts!
-		},
-	}
-}
-
 func main() {
+	httpClient := &http.Client{Timeout: 30 * time.Second}
+	database := initDatabase()
+
+	pluginManager := pm.PluginManager{
+		Database: database,
+		Client:   httpClient,
+	}
+
+	//err := pluginManager.SavePluginRepo("https://raw.githubusercontent.com/hydra-council/manga-extensions/refs/heads/main/repo_manifest.json")
+	//if err != nil {
+	//	panic(err)
+	//}
+
+	err := pluginManager.InstallPlugin(1)
+	if err != nil {
+		panic(err)
+	}
+
+	// todo add file writer
+	log.Logger = log.Output(zerolog.MultiLevelWriter(os.Stderr))
+	//config.InitConfig()
+
+	log.Debug().Any("Asd", database).Msgf("asdasd")
+	//log.Println(database)
+
 	httpclient := newInsecureClient()
 
 	client := v1connect.NewMangaServiceClient(
@@ -45,8 +51,9 @@ func main() {
 		connect.NewRequest(&v1.ListRepoRequest{}),
 	)
 	if err != nil {
-		log.Println(err)
+		log.Debug().Any("asd", err)
 		return
 	}
-	log.Println(res.Msg.GetRepos())
+
+	log.Debug().Any("asdasd", res.Msg.GetRepos())
 }
