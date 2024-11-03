@@ -111,7 +111,7 @@ final $typed_data.Uint8List listRepoResponseDescriptor = $convert.base64Decode(
 const ExtensionRepo$json = {
   '1': 'ExtensionRepo',
   '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'repoName', '3': 2, '4': 1, '5': 9, '10': 'repoName'},
     {'1': 'repoUrl', '3': 3, '4': 1, '5': 9, '10': 'repoUrl'},
     {'1': 'jsonRepoUrl', '3': 4, '4': 1, '5': 9, '10': 'jsonRepoUrl'},
@@ -122,7 +122,7 @@ const ExtensionRepo$json = {
 
 /// Descriptor for `ExtensionRepo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List extensionRepoDescriptor = $convert.base64Decode(
-    'Cg1FeHRlbnNpb25SZXBvEg4KAmlkGAEgASgJUgJpZBIaCghyZXBvTmFtZRgCIAEoCVIIcmVwb0'
+    'Cg1FeHRlbnNpb25SZXBvEg4KAmlkGAEgASgDUgJpZBIaCghyZXBvTmFtZRgCIAEoCVIIcmVwb0'
     '5hbWUSGAoHcmVwb1VybBgDIAEoCVIHcmVwb1VybBIgCgtqc29uUmVwb1VybBgEIAEoCVILanNv'
     'blJlcG9VcmwSGAoHdmVyc2lvbhgFIAEoCVIHdmVyc2lvbhIpChBtYW5pZmVzdF92ZXJzaW9uGA'
     'YgASgDUg9tYW5pZmVzdFZlcnNpb24=');

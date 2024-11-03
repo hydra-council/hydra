@@ -39,7 +39,7 @@ message ListRepoResponse {
 }
 
 message ExtensionRepo {
-  string id = 1;
+  int64 id = 1;
   string repoName = 2;
   string repoUrl = 3;
   string jsonRepoUrl = 4;

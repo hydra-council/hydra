@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hydra" uuid="e457f13b-762a-45bd-af73-212e24a4b757">
+    <data-source source="LOCAL" name="hydra" uuid="0ab03c0a-722b-4915-bee1-6fb894a0f1eb">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\Dev\Go\constellations\hydra\hydra.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\Dev\Go\constellations\hydra\appdata\hydra.db</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
       </jdbc-additional-properties>

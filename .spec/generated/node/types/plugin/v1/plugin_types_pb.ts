@@ -307,9 +307,9 @@ export class ListRepoResponse extends Message<ListRepoResponse> {
  */
 export class ExtensionRepo extends Message<ExtensionRepo> {
   /**
-   * @generated from field: string id = 1;
+   * @generated from field: int64 id = 1;
    */
-  id = "";
+  id = protoInt64.zero;
 
   /**
    * @generated from field: string repoName = 2;
@@ -344,7 +344,7 @@ export class ExtensionRepo extends Message<ExtensionRepo> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "plugin_types.v1.ExtensionRepo";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "repoName", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "repoUrl", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "jsonRepoUrl", kind: "scalar", T: 9 /* ScalarType.STRING */ },

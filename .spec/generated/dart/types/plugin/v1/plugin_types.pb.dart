@@ -396,7 +396,7 @@ class ListRepoResponse extends $pb.GeneratedMessage {
 
 class ExtensionRepo extends $pb.GeneratedMessage {
   factory ExtensionRepo({
-    $core.String? id,
+    $fixnum.Int64? id,
     $core.String? repoName,
     $core.String? repoUrl,
     $core.String? jsonRepoUrl,
@@ -429,7 +429,7 @@ class ExtensionRepo extends $pb.GeneratedMessage {
   factory ExtensionRepo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExtensionRepo', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin_types.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'repoName', protoName: 'repoName')
     ..aOS(3, _omitFieldNames ? '' : 'repoUrl', protoName: 'repoUrl')
     ..aOS(4, _omitFieldNames ? '' : 'jsonRepoUrl', protoName: 'jsonRepoUrl')
@@ -460,9 +460,9 @@ class ExtensionRepo extends $pb.GeneratedMessage {
   static ExtensionRepo? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)

@@ -59,13 +59,13 @@ class ExtensionRepo(_message.Message):
     JSONREPOURL_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
     MANIFEST_VERSION_FIELD_NUMBER: _ClassVar[int]
-    id: str
+    id: int
     repoName: str
     repoUrl: str
     jsonRepoUrl: str
     version: str
     manifest_version: int
-    def __init__(self, id: _Optional[str] = ..., repoName: _Optional[str] = ..., repoUrl: _Optional[str] = ..., jsonRepoUrl: _Optional[str] = ..., version: _Optional[str] = ..., manifest_version: _Optional[int] = ...) -> None: ...
+    def __init__(self, id: _Optional[int] = ..., repoName: _Optional[str] = ..., repoUrl: _Optional[str] = ..., jsonRepoUrl: _Optional[str] = ..., version: _Optional[str] = ..., manifest_version: _Optional[int] = ...) -> None: ...
 
 class ExtensionRequest(_message.Message):
     __slots__ = ("id",)
