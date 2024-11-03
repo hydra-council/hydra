@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"errors"
@@ -8,22 +8,26 @@ import (
 	"path/filepath"
 )
 
-func InitConfig() {
+func InitConfig() error {
 	viper.SetConfigName("config")
 	viper.SetConfigType("json")
 	viper.SetEnvPrefix("hydra")
 	viper.AutomaticEnv()
 
-	isDocker := viper.Get("IS_DOCKER")
-
+	isDocker := viper.GetBool("IS_DOCKER")
 	configDir := ""
-	if isDocker == "" {
-		log.Info().Msgf("Leviathan is running in dev machine")
-		configDir = "./appdata" // look for config in the working directory, when developing
+	if !isDocker {
+		log.Info().Msgf("Not running in docker")
+		configDir = "../appdata" // look for config in the working directory, when developing
 	} else {
-		log.Info().Msgf("Leviathan is running in docker")
-		configDir = "/app/appdata" // look in /app/appdata when running in docker
+		log.Info().Msgf("running in docker")
+		configDir = "/var/appdata"
 	}
+	err := os.MkdirAll(configDir, 0640)
+	if err != nil {
+		log.Fatal().Err(err).Msg("Failed to create config directory")
+	}
+
 	viper.AddConfigPath(configDir)
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -34,7 +38,6 @@ func InitConfig() {
 			err := viper.ReadInConfig()
 			if err != nil {
 				log.Fatal().Err(err).Msgf("Config file not found, even after creating a default file in %s", configDir)
-				return
 			}
 		} else {
 			log.Fatal().Err(err).Msgf("Something went wrong while reading config file")
@@ -42,27 +45,26 @@ func InitConfig() {
 	} else {
 		log.Info().Msgf("Successfully loaded config file from %s", viper.ConfigFileUsed())
 	}
-}
 
-func setupDefaultDirs() {
+	databasePath := configDir + "/hydra.db"
+	pluginDir := configDir + "/plugins"
+	logDir := configDir + "/logs"
 
-}
-
-// setConstEnvs defines envs that are not supposed
-// to be modified or put in the config file
-func setConstEnvs() {
-	if viper.Get("IS_DOCKER") != "" {
-		viper.SetDefault("appdata", "../appdata")
-		viper.SetDefault("database_path", "")
-	} else {
-		viper.SetDefault("appdata", "/data/appdata")
-		viper.SetDefault("database_path", "")
+	err = os.MkdirAll(pluginDir, 0640)
+	err = os.MkdirAll(logDir, 0640)
+	if err != nil {
+		return err
 	}
 
+	viper.SetDefault("database_path", databasePath)
+	viper.SetDefault("plugin_dir", pluginDir)
+	viper.SetDefault("logs", logDir)
+
+	return nil
 }
 
 func createDefaultConfigFile(configPath string) {
-	filename := "config.toml"
+	filename := "config.json"
 	finalPath := filepath.Join(configPath, filename)
 	_, err := os.Create(finalPath)
 	if err != nil {
@@ -70,19 +72,9 @@ func createDefaultConfigFile(configPath string) {
 	}
 	log.Info().Msgf("Created default config file at %s", finalPath)
 
-	createDefaultOptions()
 	err = viper.WriteConfigAs(finalPath)
 	if err != nil {
 		log.Error().Err(err).Msgf("Failed to write default config file at %s", finalPath)
 		return
 	}
-}
-
-func createDefaultOptions() {
-	// todo figure out config options
-	viper.SetDefault("clients.enable_local_docker", true)
-}
-
-func GetClientList() {
-
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
+	"github.com/spf13/viper"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	models "hydra/models"
@@ -63,6 +64,17 @@ func (pm *PluginManager) SavePluginRepo(url string) error {
 
 func (pm *PluginManager) UpdatePluginRepo() {}
 
+func (pm *PluginManager) ListPluginRepos() ([]models.PluginRepo, error) {
+	var allRepos []models.PluginRepo
+	result := pm.Database.Find(&allRepos)
+
+	if result.Error != nil {
+		return []models.PluginRepo{}, result.Error
+	}
+
+	return allRepos, nil
+}
+
 func (pm *PluginManager) SavePlugin(url string, repoId uint) error {
 	body, err := pm.DownloadFile(url)
 	if err != nil {
@@ -117,7 +129,7 @@ func (pm *PluginManager) InstallPlugin(pluginId uint) error {
 	}
 
 	// todo get plugin dir from config
-	pluginDir := "../plugin"
+	pluginDir := viper.GetString("plugin_dir")
 
 	// create plugin folder via uuid
 	folderId, err := uuid.NewUUID()
@@ -153,6 +165,17 @@ func (pm *PluginManager) InstallPlugin(pluginId uint) error {
 }
 
 func (pm *PluginManager) UpdatePlugin() {}
+
+func (pm *PluginManager) ListPlugins() ([]models.Plugin, error) {
+	var allRepos []models.Plugin
+	result := pm.Database.Find(&allRepos)
+
+	if result.Error != nil {
+		return []models.Plugin{}, result.Error
+	}
+
+	return allRepos, nil
+}
 
 func (pm *PluginManager) DownloadFile(url string) ([]byte, error) {
 	// Make the GET request

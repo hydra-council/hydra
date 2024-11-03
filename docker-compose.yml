@@ -1,10 +1,18 @@
 services:
-  leviathan:
-    image: leviathan:dev
-    build:
-      context: .
+  hydra-dev:
+    image: ras334/hydra:dev
     ports:
       - "9221:9221"
-#    volumes:
-#      - ./appdata/:/app/appdata
+    volumes:
+      - ./appdata/:/var/appdata
+    restart: "no"
+
+  lyra-dev:
+    image: ras334/lyra:dev
+    ports:
+      - "55001:55001"
+    environment:
+      hydra_plugin_dir: /var/appdata
+    volumes:
+      - ./appdata/:/var/appdata
     restart: "no"

@@ -2,11 +2,14 @@ FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
 
-RUN apk update
+RUN apk update &&  \
+    apk add --no-cache gcc musl-dev
 
 COPY . .
 
 WORKDIR /app/src
+
+ENV CGO_ENABLED=1
 
 # get depedencies
 RUN go mod tidy
@@ -21,9 +24,6 @@ WORKDIR /app/
 RUN apk update && apk add openssh
 
 COPY --from=builder /app/src/app .
-
-# start go-gin in release mode
-ENV GIN_MODE=release
 
 ENV HYDRA_IS_DOCKER=true
 
